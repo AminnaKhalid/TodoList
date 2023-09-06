@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import Iconpath from "./Iconpath";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-
+// import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import todobg from "../todobg.jpg";
 const getLocalData = () => {
   const lists = localStorage.getItem("Mylist");
 
@@ -79,115 +79,107 @@ function Mainpage() {
 
   //   adding dark mode
 
-  const [theme, setTheme] = useState(null);
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
   //   calling the func for dark modechange
 
-  useEffect(() => {
-    if (window.matchMedia("(prefers.color-scheme: dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
-  const handleChangeClick = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
   return (
-    <div className="main h-screen w-full  bg-gray-200 dark:bg-cyan-800 ">
+    <div
+      className="main h-screen w-full "
+      style={{
+        backgroundImage: `url(${todobg})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       {/* dark mode icons div */}
-      <div className="flex items-end justify-end">
-        <div className="p-4">
-          <SunIcon
-            className={`h-12 w-10 text-yellow-600 ${
-              theme === "dark" ? "" : "hidden"
-            }`}
-            onClick={handleChangeClick}
-          />
-        </div>
-        <div className="p-4">
-          <MoonIcon
-            className={`h-12 w-10 text-gray-800 ${
-              theme === "light" ? "" : "hidden"
-            }`}
-            onClick={handleChangeClick}
-          />
-        </div>
-      </div>
-      {/* whole div area placed in center */}
-      <div className="flex items-center justify-center flex-col py-10 md:pt-16">
-        <figure className="bg-gray-200 dark:bg-cyan-800">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png"
-            alt=""
-            className="w-18 h-20 bg-gray-200 dark:bg-cyan-800"
-          />
-        </figure>
+      {/* <img src={todobg} alt="" /> */}
+      <div>
+        {/* <div className="flex items-end justify-end">
+          <div className="p-4">
+            <SunIcon
+              className={`h-12 w-10 text-yellow-600 ${
+                theme === "dark" ? "" : "hidden"
+              }`}
+              onClick={handleChangeClick}
+            />
+          </div>
+          <div className="p-4">
+            <MoonIcon
+              className={`h-12 w-10 text-gray-800 ${
+                theme === "light" ? "" : "hidden"
+              }`}
+              onClick={handleChangeClick}
+            />
+          </div>
+        </div> */}
+        {/* whole div area placed in center */}
+        <div className="flex items-center justify-center flex-col py-10 md:pt-16">
+          <figure className="bg-black bg-opacity-20">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/4697/4697260.png"
+              alt=""
+              className="w-18 h-20 bg-transparent "
+            />
+          </figure>
 
-        <div className="py-4 font-bold text-2xl dark:text-white">
-          <span className="text-teal-900 dark:text-gray-100">
-            Add Your List Here
-          </span>
-        </div>
+          <div className="py-4 font-bold text-3xl dark:text-white">
+            <span className="text-white dark:text-gray-100">
+              Add Your List Here
+            </span>
+          </div>
 
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="✍ Add Items"
-            className="py-1 px-4 w-64 pr-10"
-            value={inputData}
-            onChange={(e) => setInputData(e.target.value)}
-          />
-          {toggleButton && (
-            <i
-              className="far fa-pen-to-square text-black px-1 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
-              onClick={addItems}
-            ></i>
-          )}
-          {!toggleButton && (
-            <i
-              className="fas fa-plus absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
-              onClick={addItems}
-            ></i>
-          )}
-        </div>
-        <div className="my-2 text-center">
-          {items.map((curelem) => (
-            <div
-              className="bg-gray-500 rounded text-white text-base font-semibold break-words w-64 py-1 flex items-center justify-between hover:bg-white hover:text-black my-1 dark:bg-cyan-500 dark:text-black dark:hover:bg-gray-100"
-              key={curelem.id}
-            >
-              <h2 className="px-2 mb-1">{curelem.name}</h2>
-              <div>
-                <i
-                  className="far fa-pen-to-square text-black px-1 hover:text-blue-600"
-                  onClick={() => editItem(curelem.id)}
-                ></i>
-                <i
-                  className="far fa-trash-can text-black px-1 hover:text-red-500 "
-                  onClick={() => deleteItem(curelem.id)}
-                ></i>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="✍ Add Items"
+              className="py-1 px-4 w-64 pr-10"
+              value={inputData}
+              onChange={(e) => setInputData(e.target.value)}
+            />
+            {toggleButton && (
+              <i
+                className="far fa-pen-to-square text-black px-1 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={addItems}
+              ></i>
+            )}
+            {!toggleButton && (
+              <i
+                className="fas fa-plus absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={addItems}
+              ></i>
+            )}
+          </div>
+          <div className="my-2 text-center">
+            {items.map((curelem) => (
+              <div
+                className="bg-teal-700 rounded text-white text-base font-semibold break-words w-64 py-1 flex items-center justify-between hover:bg-white hover:text-black my-1 dark:bg-cyan-500 dark:text-black dark:hover:bg-gray-100"
+                key={curelem.id}
+              >
+                <h2 className="px-2 mb-1">{curelem.name}</h2>
+                <div>
+                  <i
+                    className="far fa-pen-to-square text-black px-1 hover:text-blue-600"
+                    onClick={() => editItem(curelem.id)}
+                  ></i>
+                  <i
+                    className="far fa-trash-can text-black px-1 hover:text-red-500 "
+                    onClick={() => deleteItem(curelem.id)}
+                  ></i>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="my-4">
-          <button
-            onMouseEnter={handleHover}
-            onMouseLeave={handleMouseLeave}
-            onClick={removeAllItems}
-            className="border-2 border-gray-300 bg-blue-800 py-2 px-4 text-white font-lg hover:bg-slate-500 rounded-md transition duration-300 ease-in-out"
-            data-sm-link-text="Remove All"
-          >
-            {isHovered ? "Remove All" : "Check List"}
-          </button>
+            ))}
+          </div>
+          <div className="my-4">
+            <button
+              onMouseEnter={handleHover}
+              onMouseLeave={handleMouseLeave}
+              onClick={removeAllItems}
+              className="border-2 border-gray-300 bg-teal-800 py-2 px-4 text-white font-semibold text-xl hover:bg-slate-500 rounded-md transition duration-300 ease-in-out"
+              data-sm-link-text="Remove All"
+            >
+              {isHovered ? "Remove All" : "Check List"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
